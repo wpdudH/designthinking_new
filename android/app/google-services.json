@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904835504573",
+    "firebase_url": "https://refrigerator-manager-4fbb7.firebaseio.com",
+    "project_id": "refrigerator-manager-4fbb7",
+    "storage_bucket": "refrigerator-manager-4fbb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904835504573:android:4c49cb211e86a2831e5ad4",
+        "android_client_info": {
+          "package_name": "com.example.designthinking_new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904835504573-nsbihenl955oqaj6brj7fgn4alodfpir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.designthinking_new",
+            "certificate_hash": "d15910b702c5afe6201f141a69c9b8b5b725320b"
+          }
+        },
+        {
+          "client_id": "904835504573-2jcerkt608v83uc1lqpbff61gpr3sf7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrlnFDouWAsPUg4VTRSOwEwxVtUu4r9Ak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904835504573-2jcerkt608v83uc1lqpbff61gpr3sf7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
