@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './function_asset/toggle_textfield.dart';
@@ -64,6 +65,11 @@ Future<void> showPicker2(BuildContext context) {
 }
 
 class Curegister extends StatelessWidget {
+  final String name;
+  final String image_network;
+  Curegister(this.name, this.image_network);
+
+  static String tag = 'register-page';
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
@@ -85,7 +91,7 @@ class Curegister extends StatelessWidget {
                   fixedWidth: true,
                   fixedHeight: true,
                   child: Text(
-                    'Register',
+                    "Register",
                     style: TextStyle(
                       fontFamily: 'Acumin Pro SemiCondensed',
                       fontSize: 20,
@@ -150,6 +156,25 @@ class Curegister extends StatelessWidget {
                             ],
                           ),
                         ),
+                      ),
+                      Pinned.fromSize(
+                        bounds: Rect.fromLTWH(0.0, 0.0, 204.0, 249.0),
+                        size: Size(204.0, 249.0),
+                        pinLeft: true,
+                        pinRight: true,
+                        pinTop: true,
+                        pinBottom: true,
+                        child: Image.network(image_network),
+                      ),
+                      Text(
+                        name,
+                        style: TextStyle(
+                          fontFamily: 'Acumin Pro SemiCondensed',
+                          fontSize: 20,
+                          color: const Color(0xff748a9d),
+                          letterSpacing: -0.2,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),

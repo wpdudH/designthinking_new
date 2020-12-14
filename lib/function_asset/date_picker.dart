@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class CuDatePicker extends StatefulWidget {
   String name;
@@ -10,9 +11,16 @@ class CuDatePicker extends StatefulWidget {
 }
 
 class _CuDatePickerState extends State<CuDatePicker> {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String name;
 
   @override
+  void initState() {
+    super.initState();
+    name = widget.name;
+  }
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
@@ -25,12 +33,11 @@ class _CuDatePickerState extends State<CuDatePicker> {
         mode: CupertinoDatePickerMode.date,
         onDateTimeChanged: (DateTime newdate) {
           setState(() {
-            DateTime pickDate = newdate;
-            String expiration_date = pickDate as String;
+            String expiration_date = DateFormat('yyyy-MM-dd').format(newdate);
 
             firestore
-                .collection("")
-                .doc("")
+                .collection("User")
+                .doc(name)
                 .update({"expiration_date": expiration_date});
           });
         },

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import './bottom_bar.dart';
 import './homeScreen.dart';
 import './SearchScreen.dart';
+import 'curegister.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,4 +19,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
