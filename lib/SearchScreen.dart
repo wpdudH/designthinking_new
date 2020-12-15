@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import './Crawling.dart';
 import 'curegister.dart';
+import './data_move.dart';
 
 class SearchScreen extends StatefulWidget {
   static String tag = 'SearchScreen-page';
@@ -86,17 +87,17 @@ class SearchScreenState extends State<SearchScreen> {
                       ),
                       suffixIcon: focusNode.hasFocus
                           ? IconButton(
-                              icon: Icon(
-                                Icons.cancel,
-                                size: 20,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _filter.clear();
-                                  _searchText = "";
-                                });
-                              },
-                            )
+                        icon: Icon(
+                          Icons.cancel,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _filter.clear();
+                            _searchText = "";
+                          });
+                        },
+                      )
                           : Container(),
                       hintText: '검색',
                       labelStyle: TextStyle(color: Colors.white),
@@ -109,65 +110,67 @@ class SearchScreenState extends State<SearchScreen> {
                 ),
                 focusNode.hasFocus
                     ? Expanded(
-                        child: FlatButton(
-                          child: Text(
-                            '확인',
-                            style: TextStyle(
-                              fontFamily: 'Acumin Pro SemiCondensed',
-                              fontSize: 11,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              name = _searchText;
-                              focusNode.unfocus();
-                            });
-                          },
-                        ),
-                      )
+                  child: FlatButton(
+                    child: Text(
+                      '확인',
+                      style: TextStyle(
+                        fontFamily: 'Acumin Pro SemiCondensed',
+                        fontSize: 11,
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        name = _searchText;
+                        focusNode.unfocus();
+                      });
+                    },
+                  ),
+                )
                     : Expanded(
-                        flex: 0,
-                        child: Container(),
-                      )
+                  flex: 0,
+                  child: Container(),
+                )
               ],
             ),
           ),
           Container(
               child: name != null
                   ? Container(
-                      padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
-                      child: Column(
-                        children: <Widget>[
-                          InkWell(
-                              child: Image.network(
-                                  'http://ch4n3.kr:3000/image?keyword=' + name),
-                              onTap: () {
-                                String ingredient = name;
-                                String image_network =
-                                    'http://ch4n3.kr:3000/image?keyword=' +
-                                        name;
-                                firestore
-                                    .collection('User')
-                                    .doc(ingredient)
-                                    .set({
-                                  'name': name,
-                                  'count': "",
-                                  'expiration_date': "",
-                                  'image_network':
-                                      'http://ch4n3.kr:3000/image?keyword=' +
-                                          name,
-                                });
+                padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                        child: Image.network(
+                            'http://ch4n3.kr:3000/image?keyword=' + name),
+                        onTap: () {
+                          String ingredient = name;
+                          dataControl(ingredient, 'a');
+                          String image_network =
+                              'http://ch4n3.kr:3000/image?keyword=' +
+                                  name;
+                          firestore
+                              .collection('User')
+                              .doc(ingredient)
+                              .set({
+                            'name': name,
+                            'count': "",
+                            'expiration_date': "",
+                            'image_network':
+                            'http://ch4n3.kr:3000/image?keyword=' +
+                                name,
+                          }
+                          );
 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Curegister(name, image_network)),
-                                );
-                              }),
-                        ],
-                      ),
-                    )
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Curegister(name, image_network)),
+                          );
+                        }),
+                  ],
+                ),
+              )
                   : Container()),
         ],
       ),
