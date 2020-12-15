@@ -1,34 +1,36 @@
 import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
+import "./ReviseAlarm.dart";
 import "./Ingredient.dart";
 
 class State_screen extends StatefulWidget {
-  final List<Ingredient> ingredient_book;
-  State_screen({this.ingredient_book});
+  final List<String> ingredient_book;
+  State_screen(this.ingredient_book);
 
   _State_screenState createState() => _State_screenState();
 }
 
 class _State_screenState extends State<State_screen> {
-  List<Ingredient> ingredient_book;
-  List<String> names;
-  List<String> expiration_dates;
-  List<String> counts;
+  List<String> ingredient_book;
+  String name;
+  String expiration_date;
+  String count;
+  String image;
 
   @override
   void initState() {
     super.initState();
     ingredient_book = widget.ingredient_book;
-    names = ingredient_book.map((m) => m.name).toList();
-    expiration_dates = ingredient_book.map((m) => m.expiration_date).toList();
-    counts = ingredient_book.map((m) => m.count).toList();
+    name = ingredient_book[0];
+    expiration_date = ingredient_book[1];
+    image = ingredient_book[3];
+    count = ingredient_book[2];
   }
 
   Widget build(BuildContext context) {
-
     return Container(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-      child: Center(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: Center(
         child: Column(
           children: <Widget>[
             Container(
@@ -48,7 +50,7 @@ class _State_screenState extends State<State_screen> {
                     ),
                   ),
                   Text(
-                    names[0],
+                    name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
@@ -66,8 +68,11 @@ class _State_screenState extends State<State_screen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    child: Image.asset('assets/images/' + names[0]+'.png',
-                        width: 200, height: 200, fit: BoxFit.contain),
+                    child: Image.network(
+                        image,
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.contain),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
@@ -90,41 +95,31 @@ class _State_screenState extends State<State_screen> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(expiration_dates[0],
+                  Text(expiration_date,
                       style: TextStyle(
                         fontSize: 24,
                       )),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(counts[0], style: TextStyle(fontSize: 24)),
+                  Text(count, style: TextStyle(fontSize: 24)),
                 ],
               ),
             ),
             Container(
                 child: SizedBox(
-              height: 30,
-            )),
+                  height: 30,
+                )),
             Container(
-              child: Scroll_menu(),
+              child: Scroll_menu(context),
             ),
           ],
         ),
       ),
     );
   }
-}
 
-List<String> image = [
-  'AlarmSetting.png',
-  'DateChange.png',
-  'More.png',
-  'QuantityChange.png'
-];
-
-class Scroll_menu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget Scroll_menu(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
       child: Column(
@@ -134,25 +129,53 @@ class Scroll_menu extends StatelessWidget {
             height: 150,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: makeMenuButton(image),
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ReviseAlarm(name: name,
+                                    expiration_date: expiration_date,
+                                    count: count,
+                                    image: image)));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(right: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset('assets/images/AlarmSetting.png'),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(right: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset('assets/images/DateChange.png'),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(right: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset('assets/images/More.png'),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.only(right: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset('assets/images/QuantityChange.png'),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
-}
-
-List<Widget> makeMenuButton(List<String> image) {
-  List<Widget> results = [];
-  for (var i = 0; i < 4; i++) {
-    results.add(InkWell(
-        onTap: () {},
-        child: Container(
-          padding: EdgeInsets.only(right: 10),
-          alignment: Alignment.centerLeft,
-          child: Image.asset('assets/images/' + image[i]),
-        )));
-  }
-  return results;
 }
