@@ -10,6 +10,7 @@ import './function_asset/date_picker.dart';
 import './function_asset/state_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import './data_move.dart';
 
 Future<void> showPicker(BuildContext context) {
   return showModalBottomSheet(
@@ -30,7 +31,7 @@ Future<void> showPicker(BuildContext context) {
                     ),
                     Expanded(
                       flex: 7,
-                      child: CuDatePicker(),
+                      child: CuDatePicker(name: moveControl[0]),
                     ),
                   ],
                 ),
