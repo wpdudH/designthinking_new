@@ -1,10 +1,12 @@
+import 'package:designthinking_new/curegister.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import './ReviseHome.dart';
+import 'ReviseHome.dart';
 import 'data_move.dart';
-import 'mainpage.dart';
+import 'SearchScreen.dart';
 
 class DocumentView1 extends StatefulWidget {
+  static String tag = 'mmain-page';
   @override
   DocumentView1State createState() => DocumentView1State();
 }
@@ -30,6 +32,23 @@ class DocumentView1State extends State<DocumentView1> {
       body: Stack(children: <Widget>[
         // Adobe XD layer: 'fixed' (group)
 
+        // Adobe XD layer: '27088-[Converted]' (shape)
+        Container(
+          child: Center(
+            child: Container(
+              width: 500.0,
+              height: 460.0,
+              margin: EdgeInsets.fromLTRB(25.0, 115.0, 0.0, 0.0),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/Refrigerator.png'),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+          ),
+        ),
+
         Container(
             child: nameList != null
                 ? Container(
@@ -41,38 +60,28 @@ class DocumentView1State extends State<DocumentView1> {
                         ]),
                   )
                 : Container()),
+
         Transform.translate(
-          offset: Offset(0.0, 156.0),
-          child:
-              // Adobe XD layer: '27088-[Converted]' (shape)
-              Container(
-            width: 401.0,
-            height: 425.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: const AssetImage('assets/images/Refrigerator.png'),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
-        Transform.translate(
-          offset: Offset(140.6, 100.0),
+          offset: Offset(150.6, 100.0),
           child: FlatButton(
-            color: const Color(0xff404E5A),
-            child: Text(
-              'Register',
-              style: TextStyle(
-                fontFamily: 'Acumin Pro SemiCondensed',
-                fontSize: 16,
-                color: const Color(0xffffffff),
-                letterSpacing: -0.16,
-                fontWeight: FontWeight.w500,
+              color: const Color(0xff404E5A),
+              child: Text(
+                'Register',
+                style: TextStyle(
+                  fontFamily: 'Acumin Pro SemiCondensed',
+                  fontSize: 16,
+                  color: const Color(0xffffffff),
+                  letterSpacing: -0.16,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            onPressed: () {},
-          ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchScreen()),
+                );
+              }),
         ),
         Container(),
         Container(),
@@ -87,14 +96,15 @@ class DocumentView1State extends State<DocumentView1> {
     int lstLength = nameList.length;
     if (lstLength <= 5) {
       return Container(
-        height: 80,
+        height: 200,
         padding: EdgeInsets.symmetric(vertical: 15),
         child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 100),
             scrollDirection: Axis.horizontal,
             children: makeImageBar(context, lstLength, nameList)),
       );
     }
-    return Text("d");
+    return Text("hello");
   }
 
   List<Widget> makeImageBar(
@@ -104,8 +114,8 @@ class DocumentView1State extends State<DocumentView1> {
       results.add(InkWell(
         child: Image.network(
             'http://ch4n3.kr:3000/image?keyword=' + nameList[i],
-            width: 60,
-            height: 60,
+            width: 40,
+            height: 40,
             fit: BoxFit.contain),
         onTap: () {
           Navigator.push(context,
