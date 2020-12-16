@@ -13,7 +13,7 @@ class ToggleDatePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       borderRadius: BorderRadius.circular(20.0),
-      color: Colors.blue[100],
+      color: Color(0xff99B5DF),
       child: Text('Expiration Date'),
       onPressed: () {
         showPicker(context);
