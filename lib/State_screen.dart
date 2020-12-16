@@ -2,6 +2,8 @@ import "package:flutter/material.dart";
 import 'package:flutter/cupertino.dart';
 import "./ReviseAlarm.dart";
 import "./Ingredient.dart";
+import 'package:adobe_xd/adobe_xd.dart';
+import 'Home.dart';
 
 class State_screen extends StatefulWidget {
   final List<String> ingredient_book;
@@ -29,36 +31,44 @@ class _State_screenState extends State<State_screen> {
 
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Center(
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+      child: Center(
         child: Column(
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.only(top: 15, bottom: 15),
+              padding: const EdgeInsets.only(top: 20, bottom: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Opacity(
-                    opacity: 0.0,
-                    child: Column(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.check, size: 30),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                  IconButton(
+                    icon: Icon(Icons.backspace),
+                    color: Colors.grey[300],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50),
+                    child: Text(
+                      'Revise',
+                      style: TextStyle(
+                        fontFamily: 'Acumin Pro SemiCondensed',
+                        fontSize: 25,
+                        color: const Color(0xff748a9d),
+                        letterSpacing: -0.2,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   IconButton(
                     icon: Icon(Icons.check, size: 30),
-                    onPressed: () {},
+                    color: Colors.grey[300],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -68,48 +78,57 @@ class _State_screenState extends State<State_screen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    child: Image.network(
-                        image,
-                        width: 200,
-                        height: 200,
-                        fit: BoxFit.contain),
+                    child: Image.network(image,
+                        width: 200, height: 200, fit: BoxFit.contain),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: const Color(0xffffffff),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0x12000000),
+                          offset: Offset(0, 5),
+                          blurRadius: 30,
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey[400],
-                            offset: Offset(10.0, 1.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0,
-                          ),
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1,
-                          ),
-                        ]),
+                      ],
+                    ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(name,
+                      style: TextStyle(
+                        fontFamily: 'Acumin Pro SemiCondensed',
+                        fontSize: 25,
+                        color: const Color(0xff748a9d),
+                        letterSpacing: -0.2,
+                      )),
                   SizedBox(
                     height: 10,
                   ),
                   Text(expiration_date,
                       style: TextStyle(
-                        fontSize: 24,
+                        fontFamily: 'Acumin Pro SemiCondensed',
+                        fontSize: 25,
+                        color: const Color(0xff748a9d),
+                        letterSpacing: -0.2,
                       )),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(count, style: TextStyle(fontSize: 24)),
+                  Text(count,
+                      style: TextStyle(
+                        fontFamily: 'Acumin Pro SemiCondensed',
+                        fontSize: 25,
+                        color: const Color(0xff748a9d),
+                        letterSpacing: -0.2,
+                      )),
                 ],
               ),
             ),
             Container(
                 child: SizedBox(
-                  height: 30,
-                )),
+              height: 20,
+            )),
             Container(
               child: Scroll_menu(context),
             ),
@@ -135,11 +154,11 @@ class _State_screenState extends State<State_screen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ReviseAlarm(name: name,
-                                    expiration_date: expiration_date,
-                                    count: count,
-                                    image: image)));
+                            builder: (context) => ReviseAlarm(
+                                name: name,
+                                expiration_date: expiration_date,
+                                count: count,
+                                image: image)));
                   },
                   child: Container(
                     padding: EdgeInsets.only(right: 10),

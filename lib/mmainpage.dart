@@ -7,6 +7,7 @@ import 'SearchScreen.dart';
 
 class DocumentView1 extends StatefulWidget {
   static String tag = 'mmain-page';
+
   @override
   DocumentView1State createState() => DocumentView1State();
 }
@@ -94,7 +95,7 @@ class DocumentView1State extends State<DocumentView1> {
 
   Widget imageList(List<String> nameList) {
     int lstLength = nameList.length;
-    if (lstLength <= 5) {
+    if (lstLength <= 6) {
       return Container(
         height: 200,
         padding: EdgeInsets.symmetric(vertical: 15),

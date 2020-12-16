@@ -13,12 +13,12 @@ class Listview extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: 150,
+            height: 100,
             child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: PickButton(pick),
-                ),
+              scrollDirection: Axis.horizontal,
+              children: PickButton(pick),
             ),
+          ),
         ],
       ),
     );
@@ -31,35 +31,34 @@ List<Widget> PickButton(List<String> dataTable) {
     results.add(InkWell(
         onTap: () {},
         child: Container(
-          padding: EdgeInsets.only(right: 10),
-          alignment: Alignment.center,
-          child: Container(
-            width: 100,
-            height: 30,
-            child: Text(
-              dataTable[i],
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10,
+            padding: EdgeInsets.only(right: 10),
+            alignment: Alignment.center,
+            child: Container(
+              width: 100,
+              height: 40,
+              child: Center(
+                child: Text(
+                  dataTable[i],
+                  style: TextStyle(
+                    color: Color(0xffA6BCD0),
+                    fontSize: 16,
+                  ),
+                ),
               ),
-            ),
-            padding: EdgeInsets.only(right : 10),
-            decoration: BoxDecoration(
-              color: Colors.blue[200],
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey[500],
-                  offset: Offset(3.0, 3.0),
-                  blurRadius: 15.0,
-                  spreadRadius: 1.0,
-                )
-              ],
-            ),
-          )
-        )
-      )
-    );
+              padding: EdgeInsets.only(right: 10),
+              decoration: BoxDecoration(
+                color: Color(0xffF0F4F8),
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[300],
+                    offset: Offset(3.0, 3.0),
+                    blurRadius: 15.0,
+                    spreadRadius: 1.0,
+                  )
+                ],
+              ),
+            ))));
   }
   return results;
 }

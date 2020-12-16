@@ -16,6 +16,8 @@ class _ReviseHomeState extends State<ReviseHome> {
   String expiration_date;
   String count;
   String image;
+  String select_date;
+  String select_time;
   List<String> ingredient_book = [];
 
   @override
@@ -29,13 +31,10 @@ class _ReviseHomeState extends State<ReviseHome> {
     CollectionReference users = FirebaseFirestore.instance.collection("User");
 
     return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(name).get(),
-      // ignore: missing_return
-      builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
+        future: users.doc(name).get(),
+        // ignore: missing_return
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           Map<String, dynamic> data = snapshot.data.data();
           food = data["name"];
           expiration_date = data["expiration_date"];
@@ -46,10 +45,7 @@ class _ReviseHomeState extends State<ReviseHome> {
           ingredient_book.add(count);
           ingredient_book.add(image);
           return Revise(context);
-        }
-        return Text("Good");
-      }
-    );
+        });
   }
 
   @override
@@ -59,17 +55,16 @@ class _ReviseHomeState extends State<ReviseHome> {
 
   @override
   Widget Revise(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Stack(
-          children: <Widget>[
-            State_screen(ingredient_book),
-          ],
-        ),
-      ],
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              State_screen(ingredient_book),
+            ],
+          ),
+        ],
+      ),
     );
   }
-
 }
-
-

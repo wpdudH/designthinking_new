@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './Listview.dart';
+import './ReviseHome.dart';
 
 class ReviseAlarm extends StatefulWidget {
   String name;
@@ -45,120 +46,116 @@ class _ReviseAlarmState extends State<ReviseAlarm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 15, bottom: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Opacity(
-                    opacity: 0.0,
-                    child: Column(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.check, size: 30),
-                          onPressed: () {},
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.only(top: 20, bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.backspace),
+                      color: Colors.grey[300],
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 50),
+                      child: Text(
+                        'Alarm Setting',
+                        style: TextStyle(
+                          fontFamily: 'Acumin Pro SemiCondensed',
+                          fontSize: 25,
+                          color: const Color(0xff748a9d),
+                          letterSpacing: -0.2,
                         ),
-                      ],
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
+                    IconButton(
+                      icon: Icon(Icons.check, size: 30),
+                      color: Colors.grey[300],
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ReviseHome(name)),
+                        );
+                      },
                     ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.check, size: 30),
-                    onPressed: () {},
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    child: Image.network(
-                        image,
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.contain),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      child: Image.network(image,
+                          width: 200, height: 200, fit: BoxFit.contain),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: const Color(0xffffffff),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey[400],
-                            offset: Offset(10.0, 1.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0,
+                            color: Color(0x12000000),
+                            offset: Offset(0, 5),
+                            blurRadius: 30,
                           ),
-                          BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1,
-                          ),
-                        ]),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                      expiration_date,
-                      style: TextStyle(
-                        fontSize: 24,
-                      )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(count, style: TextStyle(fontSize: 24)),
-                ],
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(name,
+                        style: TextStyle(
+                          fontFamily: 'Acumin Pro SemiCondensed',
+                          fontSize: 25,
+                          color: const Color(0xff748a9d),
+                          letterSpacing: -0.2,
+                        )),
+                  ],
+                ),
               ),
-            ),
-            Container(
-                child: SizedBox(
-                  height: 30,
-                )),
-            Container(
-                child: Text(
-                  "Select Date",
-                  style: TextStyle(
-                    color: Colors.blueGrey[500],
-                    fontSize: 20,
-                  ),
-                )),
-            Container(
-              child: Listview(pick:dateTable),
-            ),
-            Container(
-                child: SizedBox(
-                  height: 30,
-                )),
-            Container(
-                child: Text(
-                  "Select Time",
-                  style: TextStyle(
-                    color: Colors.blueGrey[500],
-                    fontSize: 20,
-                  ),
-                )),
-            Container(
-              child: Listview(pick:timeTable),
-            ),
-          ],
+              Container(
+                  child: SizedBox(
+                height: 30,
+              )),
+              Container(
+                  child: Text(
+                "Select Date",
+                style: TextStyle(
+                  color: Colors.blueGrey[500],
+                  fontSize: 20,
+                ),
+              )),
+              Container(
+                child: Listview(pick: dateTable),
+              ),
+              Container(
+                  child: SizedBox(
+                height: 10,
+              )),
+              Container(
+                  child: Text(
+                "Select Time",
+                style: TextStyle(
+                  color: Colors.blueGrey[500],
+                  fontSize: 20,
+                ),
+              )),
+              Container(
+                child: Listview(pick: timeTable),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }
-
